@@ -3,6 +3,9 @@ package josip.cukovic.birdcounter.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.core.content.ContextCompat
+import josip.cukovic.birdcounter.BirdCounterApplication
+import josip.cukovic.birdcounter.R
 import josip.cukovic.birdcounter.R.color.*
 import josip.cukovic.birdcounter.databinding.ActivityMainBinding
 import josip.cukovic.birdcounter.model.BirdCounter
@@ -41,39 +44,39 @@ class MainActivity : AppCompatActivity() {
 
     private fun resetValues() {
         birdCounter.resetBirdCounter()
-        birdCounter.saveBirdColor(resources.getColor(white))
-        displayCounterInformation()
+        birdCounter.saveBirdColor(ContextCompat.getColor(BirdCounterApplication.ApplicationContext, white))
+        displayWelcomeMessage()
     }
 
     private fun changeToYellow() {
-        birdCounter.saveBirdColor(resources.getColor(yellow))
+        birdCounter.saveBirdColor(ContextCompat.getColor(BirdCounterApplication.ApplicationContext, yellow))
     }
 
     private fun changeToRed() {
-        birdCounter.saveBirdColor(resources.getColor(red))
+        birdCounter.saveBirdColor(ContextCompat.getColor(BirdCounterApplication.ApplicationContext, red))
     }
 
     private fun changeToGreen() {
-        birdCounter.saveBirdColor(resources.getColor(green))
+        birdCounter.saveBirdColor(ContextCompat.getColor(BirdCounterApplication.ApplicationContext, green))
     }
 
     private fun changeToBlue() {
-        birdCounter.saveBirdColor(resources.getColor(blue))
+        birdCounter.saveBirdColor(ContextCompat.getColor(BirdCounterApplication.ApplicationContext, blue))
     }
 
     override fun onResume() {
         super.onResume()
-        displayCounterInformation()
+        displayWelcomeMessage()
     }
 
-    private fun displayCounterInformation() {
+    private fun displayWelcomeMessage() {
         mainBinding.tvCountValue.text = birdCounter.getCounter().toString()
         mainBinding.tvCountValue.setBackgroundColor(birdCounter.getLastBirdColor())
     }
 
     private fun saveCount() {
         birdCounter.birdSeen()
-        displayCounterInformation()
+        displayWelcomeMessage()
     }
 
 }
