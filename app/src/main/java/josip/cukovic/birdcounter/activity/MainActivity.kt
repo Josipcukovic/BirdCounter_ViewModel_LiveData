@@ -6,7 +6,7 @@ import android.os.Bundle
 import androidx.core.content.ContextCompat
 import josip.cukovic.birdcounter.BirdCounterApplication
 import josip.cukovic.birdcounter.R
-import josip.cukovic.birdcounter.R.color.*
+
 import josip.cukovic.birdcounter.databinding.ActivityMainBinding
 import josip.cukovic.birdcounter.model.BirdCounter
 
@@ -44,24 +44,24 @@ class MainActivity : AppCompatActivity() {
 
     private fun resetValues() {
         birdCounter.resetBirdCounter()
-        birdCounter.saveBirdColor(ContextCompat.getColor(BirdCounterApplication.ApplicationContext, white))
+        birdCounter.saveBirdColor(ContextCompat.getColor(BirdCounterApplication.ApplicationContext, R.color.white))
         displayWelcomeMessage()
     }
 
     private fun changeToYellow() {
-        birdCounter.saveBirdColor(ContextCompat.getColor(BirdCounterApplication.ApplicationContext, yellow))
+        birdCounter.saveBirdColor(ContextCompat.getColor(BirdCounterApplication.ApplicationContext, R.color.yellow))
     }
 
     private fun changeToRed() {
-        birdCounter.saveBirdColor(ContextCompat.getColor(BirdCounterApplication.ApplicationContext, red))
+        birdCounter.saveBirdColor(ContextCompat.getColor(BirdCounterApplication.ApplicationContext, R.color.red))
     }
 
     private fun changeToGreen() {
-        birdCounter.saveBirdColor(ContextCompat.getColor(BirdCounterApplication.ApplicationContext, green))
+        birdCounter.saveBirdColor(ContextCompat.getColor(BirdCounterApplication.ApplicationContext, R.color.green))
     }
 
     private fun changeToBlue() {
-        birdCounter.saveBirdColor(ContextCompat.getColor(BirdCounterApplication.ApplicationContext, blue))
+        birdCounter.saveBirdColor(ContextCompat.getColor(BirdCounterApplication.ApplicationContext, R.color.blue))
     }
 
     override fun onResume() {
