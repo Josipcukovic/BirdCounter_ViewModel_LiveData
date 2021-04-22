@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.MainActivity">
+
+  <androidx.constraintlayout.widget.Guideline
+    android:id="@+id/gl_left"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    app:layout_constraintGuide_begin="16dp"/>
+ <androidx.constraintlayout.widget.Guideline
+     android:id="@+id/gl_right"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:orientation="vertical"
+     app:layout_constraintGuide_end="16dp"/>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="16dp"/>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5"/>
+
+    <TextView
+        android:id="@+id/tv_count_value"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toLeftOf="@id/gl_right"
+        app:layout_constraintLeft_toRightOf="@id/gl_left"
+        app:layout_constraintTop_toBottomOf="@id/gl_top"
+        android:text="0"
+        android:textSize="70sp"
+        android:textAlignment="center"/>
+
+    <Button
+        android:id="@+id/btn_blue_bird"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@id/tv_count_value"
+        app:layout_constraintTop_toBottomOf="@id/tv_count_value"
+        app:layout_constraintRight_toRightOf="@id/gl_vertical"
+        android:text="Blue bird"
+        android:layout_margin="10dp"/>
+
+    <Button
+        android:id="@+id/btn_red_bird"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@id/gl_vertical"
+        app:layout_constraintTop_toBottomOf="@id/tv_count_value"
+        app:layout_constraintRight_toLeftOf="@id/gl_right"
+        android:text="Red bird"
+        android:layout_margin="10dp"/>
+
+    <Button
+        android:id="@+id/btn_green_bird"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@id/gl_left"
+        app:layout_constraintTop_toBottomOf="@id/btn_blue_bird"
+        app:layout_constraintRight_toLeftOf="@id/gl_vertical"
+        android:text="Green bird"
+        android:layout_margin="10dp"/>
+    <Button
+        android:id="@+id/btn_yellow_bird"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@id/gl_vertical"
+        app:layout_constraintTop_toBottomOf="@id/btn_red_bird"
+        app:layout_constraintRight_toRightOf="@id/gl_right"
+        android:text="Yellow bird"
+        android:layout_margin="10dp"/>
+
+    <Button
+        android:id="@+id/btn_reset"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/btn_yellow_bird"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/gl_left"
+        app:layout_constraintRight_toLeftOf="@id/gl_right"
+        android:text="RESET"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
