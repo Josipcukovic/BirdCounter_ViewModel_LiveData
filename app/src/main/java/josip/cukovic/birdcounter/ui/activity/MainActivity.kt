@@ -1,27 +1,40 @@
-package josip.cukovic.birdcounter.activity
+package josip.cukovic.birdcounter.ui.activity
 
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import josip.cukovic.birdcounter.BirdCounterApplication
 import josip.cukovic.birdcounter.R
 
 import josip.cukovic.birdcounter.databinding.ActivityMainBinding
 import josip.cukovic.birdcounter.model.BirdCounter
+import josip.cukovic.birdcounter.ui.viewmodels.BirdCounterViewModel
 
 class MainActivity : AppCompatActivity() {
     private lateinit var mainBinding: ActivityMainBinding
-    private val birdCounter = BirdCounter()
+    lateinit var viewModel: BirdCounterViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mainBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mainBinding.root)
+
+        viewModel = ViewModelProvider(this).get(BirdCounterViewModel::class.java)
+        viewModel.counter.observe(this, { mainBinding.tvCountValue.text = it.toString() })
+        viewModel.birdColor.observe(this,{
+            mainBinding.tvCountValue.setBackgroundColor(viewModel.birdColor.value!!)
+            viewModel.saveBirdColor(viewModel.color)
+        })
+
         setUpUi()
     }
 
     private fun setUpUi() {
+        showInfo()
         mainBinding.btnBlueBird.setOnClickListener{
             changeToBlue()
             saveCount()
@@ -38,45 +51,45 @@ class MainActivity : AppCompatActivity() {
             changeToYellow()
             saveCount()
         }
-
         mainBinding.btnReset.setOnClickListener{resetValues()}
     }
 
     private fun resetValues() {
-        birdCounter.resetBirdCounter()
-        birdCounter.saveBirdColor(ContextCompat.getColor(BirdCounterApplication.ApplicationContext, R.color.white))
-        displayWelcomeMessage()
+        viewModel.resetCounter()
+        viewModel.counter.value = viewModel.number
+        updateColor(R.color.white)
     }
 
     private fun changeToYellow() {
-        birdCounter.saveBirdColor(ContextCompat.getColor(BirdCounterApplication.ApplicationContext, R.color.yellow))
+        updateColor(R.color.yellow)
     }
 
     private fun changeToRed() {
-        birdCounter.saveBirdColor(ContextCompat.getColor(BirdCounterApplication.ApplicationContext, R.color.red))
+        updateColor(R.color.red)
     }
 
     private fun changeToGreen() {
-        birdCounter.saveBirdColor(ContextCompat.getColor(BirdCounterApplication.ApplicationContext, R.color.green))
+        updateColor(R.color.green)
     }
 
     private fun changeToBlue() {
-        birdCounter.saveBirdColor(ContextCompat.getColor(BirdCounterApplication.ApplicationContext, R.color.blue))
+        updateColor(R.color.blue)
     }
 
-    override fun onResume() {
-        super.onResume()
-        displayWelcomeMessage()
+    private fun showInfo(){
+         mainBinding.tvCountValue.setBackgroundColor(viewModel.color)
+         mainBinding.tvCountValue.text = viewModel.number.toString()
     }
 
-    private fun displayWelcomeMessage() {
-        mainBinding.tvCountValue.text = birdCounter.getCounter().toString()
-        mainBinding.tvCountValue.setBackgroundColor(birdCounter.getLastBirdColor())
+    private fun updateColor(color: Int) {
+        viewModel.color = ContextCompat.getColor(BirdCounterApplication.ApplicationContext, color)
+        viewModel.birdColor.value = viewModel.color
+        mainBinding.tvCountValue.setBackgroundColor(viewModel.birdColor.value!!)
     }
 
     private fun saveCount() {
-        birdCounter.birdSeen()
-        displayWelcomeMessage()
+        viewModel.counter.value = ++viewModel.number
+        viewModel.birdSeen()
     }
 
 }
